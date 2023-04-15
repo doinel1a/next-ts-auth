@@ -4,6 +4,7 @@ import '@/scss/globals.scss';
 
 import type { AppProps } from 'next/app';
 import { Roboto } from 'next/font/google';
+import { SessionProvider } from 'next-auth/react';
 import React from 'react';
 
 const roboto = Roboto({
@@ -17,7 +18,11 @@ const roboto = Roboto({
   variable: '--roboto'
 });
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({
+  Component,
+  // eslint-disable-next-line unicorn/prevent-abbreviations
+  pageProps: { session, ...pageProps }
+}: AppProps) {
   return (
     <>
       <style jsx global>{`
@@ -26,7 +31,9 @@ export default function App({ Component, pageProps }: AppProps) {
         }
       `}</style>
 
-      <Component {...pageProps} />
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
     </>
   );
 }
