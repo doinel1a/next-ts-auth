@@ -24,6 +24,9 @@ yarn.lock
 high-level-dependencies.html
 TODO.md
 
+# db
+/prisma/migrations
+
 # misc
 .DS_Store
 *.pem
